@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Filme - DevFLIX</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Adicionar Novo Filme</h2>
+
+        <form method="POST" enctype="multipart/form-data" class="form-filme">
+
+            <input type="text" name="titulo" placeholder="Título do Filme" required>
+
+            <input type="text" name="genero" placeholder="Gênero (Ex: Terror, Comédia)" required>
+
+            <input type="number" name="ano" placeholder="Ano de Lançamento" required>
+
+            <div class="upload-area" id="drop-zone" onclick="document.getElementById('file-input').click();">
+                <div class="upload-placeholder">
+                    <span class="upload-icon">📁</span>
+                    <p id="file-label">Selecione a Capa do Filme</p>
+                    <span class="upload-hint">Formatos: PNG, JPG, JPEG</span>
+                </div>
+                <input type="file" id="file-input" name="imagem" accept=".jpg,.jpeg,.png" required style="display: none;">
+            </div>
+
+            <button type="submit" class="btn-save">Salvar Filme</button>
+        </form>
+
+        <a href="{{ url_for('listar_filmes') }}" class="btn-back">← Voltar para a lista</a>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const fileLabel = document.getElementById('file-label');
+
+        // Avisa o usuário que o arquivo foi selecionado mudando o texto
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileLabel.innerText = "Foto selecionada: " + this.files[0].name;
+                fileLabel.style.color = "#e50914";
+            }
+        });
+    </script>
+
+</body>
+</html>
